@@ -42,7 +42,7 @@ git clone https://github.com/RoboMaster-Club/Onboarding-Project-2.git
 1. Open CubeMX and locate the "Home" screen. It may ask you to create an account first.
 2. Open the "Create from Board" menu and search for the **NUCLEO-L432KC** board in the "Commercial Part Number" menu.
 3. Double-click the correct board to generate the CubeMX project. When it asks if you want to initialize the board to its default mode, press "No" so that the board will be in a clean state. You should see the following if you completed the steps correctly:
-   ![[Pasted image 20240816214248.png|400]]
+   ![New Project Image](/images/New_Project.png)
 4. Click on the "Project Manager" tab.
    - Name your project `Onboarding_Project_2`.
    - Set the project location to the parent folder of your cloned repository. For example, if your clone is located at `Clones/Onboarding_Project_2`, select the parent folder `Clones` as the project location.
@@ -61,8 +61,8 @@ git clone https://github.com/RoboMaster-Club/Onboarding-Project-2.git
 3. In the new menu that opens, find "Channel 1" and select "PWM Generation CH1" from the dropdown.
 4. You should see the "PA8" pin turn green in the Pinout view, indicating that it has been successfully enabled.
 5. In the Configuration menu, open the "Counter Settings" and "PWM Generation Channel 1" menus. Configure them according to the following images:
-   ![[Pasted image 20240817161724.png]]
-   ![[Pasted image 20240817194257.png]]
+   ![Counter Settings Image](/images/Counter_Settings.png)
+   ![PWM Settings Image](/images/PWM_Settings.png)
 
 - Here are a few key settings to understand:
   - **Prescaler** -> `0` (each tick of the clock corresponds to one tick of the timer).
@@ -76,7 +76,7 @@ git clone https://github.com/RoboMaster-Club/Onboarding-Project-2.git
 
 1. Hit the blue "Generate Code" button in the top right.
 2. Open your generated project using **VSCode**. If you did everything correctly, you should see the following file structure:
-   ![[Pasted image 20240817172854.png]]
+   ![File Structure Image](/images/File_Structure.png)
 3. Edit the `Makefile` file and add the following lines to the very end (after where it says `# *** EOF ***`):
 
 ```
