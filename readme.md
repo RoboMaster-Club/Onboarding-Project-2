@@ -11,6 +11,7 @@ A PWM (Pulse Width Modulation) signal is a simple digital signal often used to e
 The embedded processor we use has a single core, so we will use FreeRTOS to manage priority and execute several tasks simultaneously. Tasks could include sending motor instructions over CAN or handling drivetrain calculations.
 
 ![RTOS Scheduling Image](https://open4tech.com/wp-content/uploads/2019/11/preemptive_scheduling.jpg)
+
 [image source](https://open4tech.com/rtos-scheduling-algorithms/)
 
 ## Overview
@@ -74,7 +75,7 @@ git clone https://github.com/RoboMaster-Club/Onboarding-Project-2.git
 
 ### Part 5: Generate and Setup Project
 
-1. Hit the blue "Generate Code" button in the top right.
+1. Hit the blue "Generate Code" button in the top right. It will give you a warning but ignore it for now.
 2. Open your generated project using **VSCode**. If you did everything correctly, you should see the following file structure:
    ![File Structure Image](/images/File_Structure.png)
 3. Edit the `Makefile` file and add the following lines to the very end (after where it says `# *** EOF ***`):
@@ -100,9 +101,9 @@ flash: $(BUILD_DIR)/$(TARGET).bin
 void Toggle_LED(void *pvParameters);
 ```
 
-    - `*pvParameters` is simply ...
+- `*pvParameters` is a pointer to any data you want to pass to a FreeRTOS task. In this case, we will simply pass `NULL`.
 
-3. We will create the FreeRTOS Task by using `xTaskCreate()` on line 130 under the comment that says `USER CODE BEGIN RTOS_THREADS`
+3. We will create the FreeRTOS Task by using `xTaskCreate()` on line 130 under the comment that says `USER CODE BEGIN RTOS_THREADS`.
 
 ```
 xTaskCreate(Toggle_LED, "Toggle_LED", 128, NULL, 1, NULL);
@@ -123,7 +124,7 @@ void Toggle_LED(void *pvParameters)
 
 - In this function, we define an infinite loop where we call the `HAL_GPIO_TogglePin()` function to toggle GPIO Pin B3, then use `osDelay()` to wait 1000ms before the loop repeats. This is very similar to the function you wrote in the last project which can be found [here](https://github.com/RoboMaster-Club/Onboarding-Project-1?tab=readme-ov-file#part-3-your-first-function).
 
-5. Next, you will repeat the process of steps 2 and 3 (create function prototype and task) with the function given below:
+5. Next, you will repeat the process of steps 2-4 (create function prototype, task, define function) with the function given below:
 
 ```
 void Toggle_PWM(void *pvParameters)
@@ -145,7 +146,7 @@ void Toggle_PWM(void *pvParameters)
 }
 ```
 
-- `static uint8_t on = 0;` defines an ... bit unsigned integer which keeps its value whenever the function is called
+- `static uint8_t on = 0;` defines an unsigned 8-bit integer which keeps its value between function is calls.
 - `on ^= 1;` uses XOR operator to toggle the `on` variable between 1 and 0.
 - `HAL_TIM_PWM_Start()` and `HAL_TIM_PWM_Stop()` start/stops the PWM generation on TIM1 CH1 (using the settings we configured in CubeMX in [Part 4](https://github.com/RoboMaster-Club/Onboarding-Project-2?tab=readme-ov-file#part-4-configure-the-pwm-pin-out)).
 
