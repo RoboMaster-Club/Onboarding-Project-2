@@ -1,5 +1,9 @@
 # Onboarding Project - Introduction to Embedded 2
 
+## Overview
+
+The end goal of this project is to use an STM32 chip to generate and toggle a PWM signal and LED simultaneously, but at different rates. This project will guide you through the step-by-step process of creating a project in CubeMX, assigning pinout, generating PWM, and using concurrent scheduling using FreeRTOS.
+
 ## Background Info
 
 A PWM (Pulse Width Modulation) signal is a simple digital signal often used to emulate an analog signal or control motors and servos. It works by rapidly switching the signal on and off so that the average voltage matches the desired analog value. Here are some key terms to understand when discussing PWM signals:
@@ -8,15 +12,13 @@ A PWM (Pulse Width Modulation) signal is a simple digital signal often used to e
 - **Duty Cycle**: The percentage of one period in which the signal is "on." For example, a PWM signal with a 25% duty cycle is "on" 25% of the time and "off" 75% of the time.
 - **Resolution**: The number of discrete steps in the PWM signal. For example, an 8-bit resolution PWM can have 256 different duty cycle levels (2^8).
 
-The embedded processor we use has a single core, so we will use FreeRTOS to manage priority and execute several tasks simultaneously. Tasks could include sending motor instructions over CAN or handling drivetrain calculations.
+![PWM Image](https://cdn1.byjus.com/wp-content/uploads/2021/01/duty-cycle-of-pulse-width-modulation.png)
+[image source](https://byjus.com/physics/pulse-width-modulation/)
+
+The embedded processor we use has a single core, so we will use an operating system (FreeRTOS) to manage priorities and execute multiple tasks simultaneously. These tasks may include sending motor instructions over CAN or handling drivetrain calculations. The switching and execution of tasks happens so quickly that it effectively functions like a concurrent system.
 
 ![RTOS Scheduling Image](https://open4tech.com/wp-content/uploads/2019/11/preemptive_scheduling.jpg)
-
 [image source](https://open4tech.com/rtos-scheduling-algorithms/)
-
-## Overview
-
-The end goal of this project is to use an STM32 chip to generate and toggle a PWM signal and LED simultaneously, but at different rates. This project will guide you through the step-by-step process of creating a project in CubeMX, assigning pinout, concurrent scheduling using FreeRTOS, and using timers.
 
 ## Prerequisites
 
@@ -31,8 +33,10 @@ The end goal of this project is to use an STM32 chip to generate and toggle a PW
 In order to complete this project you will need to download the following software:
 
 - CubeMX - Used to configure STM32 microcontrollers and generate initialization code. Download the appropriate version from [here](https://www.st.com/en/development-tools/stm32cubemx.html#st-get-software). It may ask you to create an ST account, so just use your school email.
-  You will also need the same [tools used in the last project](https://github.com/RoboMaster-Club/Onboarding-Project-1?tab=readme-ov-file#part-1-download-tools).
-  Clone the repository using the following command in your terminal:
+
+- You will also need all of same [tools used in the last project](https://github.com/RoboMaster-Club/Onboarding-Project-1?tab=readme-ov-file#part-1-download-tools).
+
+- Clone the repository using the following command in your terminal:
 
 ```
 git clone https://github.com/RoboMaster-Club/Onboarding-Project-2.git
